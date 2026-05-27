@@ -1,0 +1,52 @@
+﻿Prueba Técnica: "Real-Time Order & Delivery Tracker"
+Tiempo límite: 120 minutos.
+Modalidad: Live Coding o Repositorio Privado.
+Objetivo
+Construir una pequeña aplicación funcional (MVP) que permita gestionar y rastrear "Órdenes de Entrega" en tiempo real. El candidato debe usar NestJS con TypeScript para el Backend, React Native para el Frontend Mobile, y persistir los datos en MongoDB.
+Parte 1: Backend & Base de Datos (45 min)
+El candidato debe demostrar capacidad de diseño de arquitectura escalable, APIs modernas y manejo de datos en tiempo real.
+1. Modelo de Datos (MongoDB + Mongoose/TypeORM): Crear una colección para Orders con los campos: customerName, deliveryAddress, status (pending/in_transit/delivered), createdAt, updatedAt y un campo dinámico de geolocalización o coordenadas simuladas.
+2. API & Tiempo Real: * Implementar un endpoint mutation en GraphQL o un REST POST /orders para crear una orden (Validar que el customerName y la dirección sean obligatorios).
+   * Implementar un Gateway de WebSockets (o suscripción GraphQL) para emitir un evento cada vez que una orden cambie de estado o se cree.
+3. Lógica y Buenas Prácticas: Se evaluará el uso correcto de módulos, controladores/resolvers y servicios siguiendo la arquitectura por defecto de NestJS y tipado estricto con TypeScript.
+Parte 2: Frontend Mobile con React Native (40 min)
+Se evalúa la arquitectura de componentes, manejo de estados, consumo de APIs y la integración de eventos en tiempo real.
+1. Componentes & UI: Crear una interfaz limpia (utilizando StyleSheet o Tailwind/NativeWind) que conste de:
+   * Una pantalla/formulario para registrar una nueva orden de entrega.
+   * Una lista para visualizar las órdenes creadas.
+2. Servicios & Consumo: Implementar la conexión para consumir el backend utilizando un cliente GraphQL (Apollo) o Axios.
+3. Interactividad en Tiempo Real: Configurar el cliente de WebSockets (o GraphQL Subscriptions) en la app móvil para que la lista de órdenes se actualice automáticamente en tiempo real cuando el backend notifique un cambio, sin necesidad de recargar manualmente.
+Parte 3: Pruebas E2E / Integración (20 min)
+El candidato debe asegurar que el flujo completo funciona de manera integrada y robusta.
+1. Herramienta: Uso de Cypress (orientado a la web/api de la app) o herramientas de testing nativas/simuladores como Detox o React Native Testing Library para flujos críticos. (Alternativamente, se permite automatizar la prueba de integración del flujo API -> WebSocket -> UI).
+2. Escenario de prueba:
+   * Iniciar la aplicación móvil (o simulador/entorno de prueba).
+   * Diligenciar los datos del formulario de la orden.
+   * Hacer clic en "Crear Orden".
+   * Verificar que el evento viaje al Backend, se guarde en MongoDB, se emita por WebSockets y la nueva orden aparezca instantáneamente en la lista del celular.
+Parte 4: Infraestructura y Despliegue (15 min - Teórico/Práctico)
+Evaluación de conocimientos de DevOps, SRE y escalabilidad.
+1. Containerización: Entregar un archivo docker-compose.yml estructurado que levante el Backend (NestJS), la base de datos (MongoDB) y un servicio de caché/mensajería si fuera necesario (ej. Redis/Kafka de forma teórica o configurada) con un solo comando.
+2. CI/CD y Arquitectura (Plus): Explicar brevemente en un archivo README.md o YAML cómo automatizaría el despliegue de este ecosistema en un entorno de staging en la nube (AWS/GCP), y cómo escalaría la app usando Kafka para la mensajería pesada o gRPC para la comunicación entre microservicios.
+Entrega
+* Deberá entregar la URL del código completo (Repositorio de GitHub/GitLab).
+* Un video en Loom de máximo 5 minutos sustentando su desarrollo, arquitectura de NestJS, manejo del estado en React Native y decisiones técnicas tomadas.
+Criterios de Evaluación para el Reclutador
+Criterio
+	Excelente (Semi-Senior)
+	Regular (Junior)
+	Arquitectura (NestJS/React Native)
+	Código modular (uso de Modules, Providers, DTOs en NestJS). Separación de hooks/servicios en el frontend móvil.
+	Todo en un solo archivo o controlador gigante. Lógica de negocio mezclada dentro de los componentes visuales de React Native.
+	Manejo de TypeScript & Estado
+	Uso estricto de interfaces, tipos, decoradores y manejo limpio del estado asíncrono en tiempo real (WebSockets).
+	Uso excesivo de any. Mutación directa del estado o pérdida de sincronía en los eventos en tiempo real.
+	Inglés (Bilingüe)
+	Comenta el código en inglés y puede explicar su solución de arquitectura e infraestructura fluidamente en este idioma.
+	Dificultad para explicar términos técnicos o documentar el repositorio en inglés.
+	E2E / Integración Testing
+	Test robusto que verifica la integración de la base de datos y la recepción del evento en tiempo real.
+	Test frágil, inexistente o que solo prueba un renderizado estático superficial.
+	Infraestructura y Escalabilidad
+	Dockerfile optimizado (multi-stage builds) y claridad conceptual de cómo integrar herramientas como Redis/Kafka/gRPC para escalar.
+	No sabe cómo conectar los contenedores entre sí o confunde el flujo de comunicación entre microservicios.

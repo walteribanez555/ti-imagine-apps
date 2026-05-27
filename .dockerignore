@@ -1,0 +1,21 @@
+# Global node_modules
+node_modules/
+
+# Mobile app — not needed by the backend image
+apps/delivery-app/
+apps/delivery-app/node_modules/
+
+# Backend build artifacts (built inside Docker)
+apps/delivery-backend/dist/
+apps/delivery-backend/node_modules/
+
+# Dev / config files
+.git/
+.env
+**/.env
+infra/
+technical-interview-design/
+*.zip
+*.txt
+*.md
+turbo.json
